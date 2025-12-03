@@ -1,0 +1,32 @@
+First allocate a build machine with max parameters
+
+Load the serpens.cpp, serpens.h, mmio.h, sparse_helper.h, link_config_u280_24ch.ini, run_hls.tcl
+
+Then run the following command
+vitis-run --mode hls --tcl run_hls.tcl
+It may ask to re-run then do it otherwise it's fine
+
+This will create the Serpens.xo
+
+Then run the following command
+
+tmux new -s link24 'v++ -l -t hw --platform /opt/xilinx/platforms/xilinx_u280_gen3x16_xdma_1_202211_1/xilinx_u280_gen3x16_xdma_1_202211_1.xpfm --config link_config_u280_24ch.ini --clock.defaultFreqHz 150000000 Serpens.xo -o Serpens.xclbin --log_dir logs/link --temp_dir _x/link'
+
+This will link the config file and build the Serpens.xclbin
+
+Then allocate a machine with alveo u280
+
+Upload the Serpens.xclbin, host_xrt.cpp and spmvgen.py files
+
+Then run the following command to compilke the spmv_host
+
+g++ host_xrt.cpp -o host_xrt \
+  -I/opt/xilinx/xrt/include \
+  -L/opt/xilinx/xrt/lib \
+  -L/usr/lib/x86_64-linux-gnu \
+  -lOpenCL -lxrt_coreutil \
+  -pthread -std=c++17 -O3
+
+then run the following command to run the kernel
+
+./host_xrt Serpens.xcbin [matrix file].mtx
