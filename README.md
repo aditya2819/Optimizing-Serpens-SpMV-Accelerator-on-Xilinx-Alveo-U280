@@ -2,7 +2,7 @@
 
 Project: High-performance Sparse Matrix–Vector multiply (SpMV) accelerator optimized for the Xilinx Alveo U280.
 
-This repository contains the host code, FPGA bitstreams and helper scripts needed to build and run the Serpens SpMV accelerator. Presentation slides and the project report were removed from this fork to keep the repository focused and production-ready.
+This repository contains the host code, FPGA bitstreams and helper scripts needed to build and run the Serpens SpMV accelerator. 
 
 Repository layout
 - `src/` : FPGA kernel sources and host helper headers.
@@ -62,6 +62,3 @@ Notes & troubleshooting
 
 Contact / Attribution
 - This fork is maintained by the repository owner. Please check upstream for original license and contributors.
-
----
-This README replaces presentation materials and focuses on delivering a clean, maintainable repo layout and clear run/build instructions. If you want more detailed step-by-step Vitis build scripts or CI integration, tell me and I will add them.
